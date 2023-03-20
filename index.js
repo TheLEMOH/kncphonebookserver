@@ -15,6 +15,7 @@ const position = require("./server/routers/position");
 const pdf = require("./server/routers/pdf");
 const degree = require("./server/routers/degree");
 const user = require("./server/routers/user");
+const individual = require("./server/routers/individual");
 
 app.use("/api", employee);
 app.use("/api", organization);
@@ -24,6 +25,7 @@ app.use("/api", position);
 app.use("/api", pdf);
 app.use("/api", degree);
 app.use("/api", user);
+app.use("/api", individual);
 
 app.use((err, req, res, next) => {
   const errorText = err.toString();

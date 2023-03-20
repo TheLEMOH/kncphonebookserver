@@ -6,6 +6,7 @@ const DivisionModel = require("./division");
 const SubdivisionModel = require("./subdivision");
 const DegreeModel = require("./degree");
 const PositionModel = require("./position");
+const IndividualModel = require("./individual");
 
 const Employee = db.define(
   "employees",
@@ -100,11 +101,13 @@ Employee.belongsTo(DivisionModel);
 Employee.belongsTo(SubdivisionModel);
 Employee.belongsTo(DegreeModel);
 Employee.belongsTo(PositionModel);
+Employee.belongsTo(IndividualModel);
 
 OrganizationModel.hasMany(Employee);
 DivisionModel.hasMany(Employee);
 SubdivisionModel.hasMany(Employee);
 PositionModel.hasMany(Employee);
 DegreeModel.hasMany(Employee);
+IndividualModel.hasMany(Employee);
 
 module.exports = Employee;

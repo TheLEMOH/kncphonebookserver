@@ -5,6 +5,7 @@ const Division = require("../models/division");
 const Subdivision = require("../models/subdivision");
 const Position = require("../models/Position");
 const Model = require("../models/employee");
+const Individual = require("../models/individual");
 
 const CreateFilter = require("../scripts/createfilters");
 const Offset = require("../scripts/offset");
@@ -57,8 +58,57 @@ class Controller {
         order: order,
         offset: offset,
         limit: limit,
-        include: [{ where: organizationFilter, model: Organization }, { where: subDivisionFilter, model: Subdivision }, { model: Degree }, { where: divisionFilter, model: Division }, { where: positionFilter, model: Position }],
+        include: [
+          { where: organizationFilter, model: Organization },
+          { where: subDivisionFilter, model: Subdivision },
+          { model: Degree },
+          { where: divisionFilter, model: Division },
+          { where: positionFilter, model: Position },
+        ],
       });
+      res.json(items);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async getPagesGroup(req, res, next) {
+    try {
+      const { byLevel } = req.query;
+      const filter = CreateFilter(req.query);
+      const rawEmployeersFilter = { room: filter.room, name: filter.name, phone: filter.phone, email: filter.email };
+      const organizationFilter = filter.organization ? { name: filter.organization } : null;
+      const divisionFilter = filter.division ? { name: filter.division } : null;
+      const subDivisionFilter = filter.subdivision ? { name: filter.subdivision } : null;
+      const positionFilter = filter.position ? { name: filter.position } : null;
+      const employeerFilter = Object.fromEntries(Object.entries(rawEmployeersFilter).filter(([_, v]) => v != null));
+
+      const offset = Offset(req);
+
+      let order = byLevel === "true" ? [["levelSort", "DESC"]] : ["name"];
+
+      const items = await Individual.findAndCountAll({
+        order: ["name"],
+        include: {
+          model: Model,
+          where: employeerFilter,
+          order: order,
+          offset: offset,
+          limit: limit,
+          include: [
+            { where: organizationFilter, model: Organization },
+            { where: subDivisionFilter, model: Subdivision },
+            { model: Degree },
+            { where: divisionFilter, model: Division },
+            { where: positionFilter, model: Position },
+          ],
+        },
+      });
+
+      const filteredItems = items.rows.filter((i) => i.employees.length != 0);
+
+      items.rows = filteredItems;
+
       res.json(items);
     } catch (err) {
       next(err);
