@@ -1,6 +1,6 @@
 const Router = require('express')
 const router = new Router()
-const controller = require('../controllers/division')
+const controller = require('../services/division')
 const authMiddleware = require('../middleware/authMiddleware')
 router.post('/divisions', authMiddleware, controller.create)
 router.get('/divisions', controller.get)

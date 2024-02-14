@@ -1,6 +1,6 @@
 const Router = require("express");
 const router = new Router();
-const controller = require("../controllers/employee");
+const controller = require("../services/employee");
 const authMiddleware = require("../middleware/authMiddleware");
 router.post("/employees", authMiddleware, controller.create);
 router.post("/employees/bulkcreate", authMiddleware, controller.createbulk);

@@ -1,4 +1,4 @@
 module.exports = {
-    secret: 'HATE_NIGGERS',
+    secret: 'MALIMONOV',
     limit: 20
 }
