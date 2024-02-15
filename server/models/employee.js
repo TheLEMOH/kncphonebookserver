@@ -73,6 +73,14 @@ const Employee = db.define(
       },
     },
 
+    individualId: {
+      type: DataTypes.UUID,
+      references: {
+        model: IndividualModel,
+        key: "id",
+      },
+    },
+
     floor: {
       type: DataTypes.INTEGER,
     },
@@ -81,9 +89,9 @@ const Employee = db.define(
       type: DataTypes.STRING,
     },
 
-    the_geom: {
-      type: DataTypes.GEOMETRY("POINT"),
-    },
+    /*  the_geom: {
+       type: DataTypes.GEOMETRY("POINT"),
+     }, */
 
     levelSort: {
       type: DataTypes.INTEGER,
