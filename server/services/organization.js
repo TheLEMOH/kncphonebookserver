@@ -6,7 +6,7 @@ const Division = require("../models/division")
 const CreateFilter = require("../scripts/createfilters")
 const Offset = require('../scripts/offset')
 
-class Controller {
+class Service {
     async create(req, res, next) {
         try {
             await Model.create(req.body)
@@ -102,4 +102,4 @@ class Controller {
 
 }
 
-module.exports = new Controller()
+module.exports = new Service()

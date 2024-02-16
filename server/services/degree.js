@@ -1,10 +1,10 @@
 const Model = require('../models/degree')
 
-class Controller {
+class Service {
     async get(req, res) {
         const items = await Model.findAll()
         res.json(items)
     }
 }
 
-module.exports = new Controller()
+module.exports = new Service()

@@ -1,14 +1,14 @@
 const Router = require("express");
 const router = new Router();
-const controller = require("../services/employee");
+const service = require("../services/employee");
 const authMiddleware = require("../middleware/authMiddleware");
-router.post("/employees", authMiddleware, controller.create);
-router.post("/employees/bulkcreate", authMiddleware, controller.createbulk);
-router.get("/employees", controller.get);
-router.get("/employees/pages", controller.getPages);
-router.get("/employees/pages/group", controller.getPagesGroup);
-router.get("/employees/:id", authMiddleware, controller.getOne);
-router.put("/employees/:id", authMiddleware, controller.update);
-router.delete("/employees/:id", authMiddleware, controller.delete);
+router.post("/employees", authMiddleware, service.create);
+router.post("/employees/bulkcreate", authMiddleware, service.createbulk);
+router.get("/employees", service.get);
+router.get("/employees/pages", service.getPages);
+router.get("/employees/pages/group", service.getPagesGroup);
+router.get("/employees/:id", authMiddleware, service.getOne);
+router.put("/employees/:id", authMiddleware, service.update);
+router.delete("/employees/:id", authMiddleware, service.delete);
 
 module.exports = router;

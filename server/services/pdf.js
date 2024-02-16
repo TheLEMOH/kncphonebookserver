@@ -3,7 +3,7 @@ const Subdivision = require('../models/subdivision')
 const Division = require("../models/division")
 const Employee = require("../models/employee")
 
-class Controller {
+class Service {
     async get(req, res, next) {
         try {
             const id = req.params.id
@@ -21,7 +21,7 @@ class Controller {
 
 }
 
-module.exports = new Controller()
+module.exports = new Service()
 
 
 

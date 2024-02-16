@@ -1,7 +1,7 @@
 const Router = require('express')
 const router = new Router()
-const controller = require('../services/degree')
+const service = require('../services/degree')
 
-router.get('/degrees', controller.get)
+router.get('/degrees', service.get)
 
 module.exports = router

@@ -5,7 +5,7 @@ const SubdivisionModel = require('../models/subdivision')
 
 const CreateFilter = require("../scripts/createfilters")
 
-class Controller {
+class Service {
     async create(req, res, next) {
         try {
             await Model.create(req.body)
@@ -77,4 +77,4 @@ class Controller {
 
 }
 
-module.exports = new Controller()
+module.exports = new Service()

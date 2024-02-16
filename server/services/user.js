@@ -1,6 +1,6 @@
 const Model = require('../models/user')
 const jwt = require('jsonwebtoken')
-
+const CreateFilter = require("../scripts/createfilters")
 const bcrypt = require('bcrypt');
 const salt = 3
 
@@ -13,7 +13,7 @@ const generateAccessToken = (id) => {
     return jwt.sign(payload, secret, { expiresIn: '8h' })
 }
 
-class Controller {
+class Service {
     async create(req, res, next) {
         try {
             await Model.create(req.body)
@@ -27,7 +27,8 @@ class Controller {
     async getPages(req, res, next) {
         try {
             const offset = Offset(req)
-            const items = await Model.findAndCountAll({ offset: offset, limit: limit, attributes: ['id', 'name'] })
+            const filter = CreateFilter(req.query)
+            const items = await Model.findAndCountAll({ where: filter, offset: offset, limit: limit, attributes: ['id', 'name'] })
             res.json(items)
         }
         catch (err) {
@@ -160,4 +161,4 @@ class Controller {
     }
 }
 
-module.exports = new Controller()
+module.exports = new Service()
