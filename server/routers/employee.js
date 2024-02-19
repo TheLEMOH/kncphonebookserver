@@ -8,6 +8,7 @@ router.get("/employees", service.get);
 router.get("/employees/pages", service.getPages);
 router.get("/employees/pages/group", service.getPagesGroup);
 router.get("/employees/:id", authMiddleware, service.getOne);
+router.get("/empsub/:id", service.getByIdSubdivision);
 router.put("/employees/:id", authMiddleware, service.update);
 router.delete("/employees/:id", authMiddleware, service.delete);
 

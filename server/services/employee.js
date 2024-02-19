@@ -119,7 +119,7 @@ class Service {
     try {
       const items = await Model.findAll({
         order: ["name"],
-        include: [{ model: Organization }, { model: Subdivision }, { model: Degree }],
+        include: [{ model: Organization }, { model: Subdivision }, { model: Degree }, { model: Position }],
       });
       res.json(items);
     } catch (err) {
@@ -131,6 +131,18 @@ class Service {
     try {
       const id = req.params.id;
       const item = await Model.findOne({ where: { id: id } });
+      res.json(item);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async getByIdSubdivision(req, res, next) {
+    try {
+      const id = req.params.id;
+
+      const item = await Model.findAll({ where: { subdivisionId: id }, include: [{ model: Position }] });
+
       res.json(item);
     } catch (err) {
       next(err);
