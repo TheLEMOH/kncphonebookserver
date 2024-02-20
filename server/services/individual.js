@@ -19,7 +19,7 @@ class Service {
     try {
       const filter = CreateFilter(req.query);
       const individual = filter.name ? { name: filter.name } : null;
-      const organizationFilter = filter.organization ? { name: filter.organization } : null;
+      const organizationFilter = filter.organization ? { shortName: filter.organization } : null;
 
       const offset = Offset(req);
 

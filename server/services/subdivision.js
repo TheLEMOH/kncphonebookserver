@@ -26,7 +26,7 @@ class Service {
             const filter = CreateFilter(req.query)
 
             const subDivisionFilter = filter.name ? { name: filter.name } : null
-            const organizationFilter = filter.organization ? { name: filter.organization } : null
+            const organizationFilter = filter.organization ? { shortName: filter.organization } : null
             const divisionFilter = filter.division ? { name: filter.division } : null
 
             const items = await Model.findAndCountAll({

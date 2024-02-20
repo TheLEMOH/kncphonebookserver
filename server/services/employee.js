@@ -43,7 +43,7 @@ class Service {
       const { byLevel } = req.query;
       const filter = CreateFilter(req.query);
       const rawEmployeersFilter = { room: filter.room, name: filter.name, phone: filter.phone, email: filter.email };
-      const organizationFilter = filter.organization ? { name: filter.organization } : null;
+      const organizationFilter = filter.organization ? { shortName: filter.organization } : null;
       const divisionFilter = filter.division ? { name: filter.division } : null;
       const subDivisionFilter = filter.subdivision ? { name: filter.subdivision } : null;
       const positionFilter = filter.position ? { name: filter.position } : null;
@@ -77,7 +77,7 @@ class Service {
       const { byLevel } = req.query;
       const filter = CreateFilter(req.query);
       const rawEmployeersFilter = { room: filter.room, name: filter.name, phone: filter.phone, email: filter.email };
-      const organizationFilter = filter.organization ? { name: filter.organization } : null;
+      const organizationFilter = filter.organization ? { shortName: filter.organization } : null;
       const divisionFilter = filter.division ? { name: filter.division } : null;
       const subDivisionFilter = filter.subdivision ? { name: filter.subdivision } : null;
       const positionFilter = filter.position ? { name: filter.position } : null;
@@ -86,6 +86,8 @@ class Service {
       const offset = Offset(req);
 
       let order = byLevel === "true" ? [["levelSort", "DESC"]] : ["name"];
+
+      console.log(filter)
 
       const items = await Individual.findAndCountAll({
         order: ["name"],

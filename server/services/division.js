@@ -2,6 +2,7 @@ const Model = require('../models/division')
 
 const OrganizationModel = require('../models/organization')
 const SubdivisionModel = require('../models/subdivision')
+const EmployeeModel = require("../models/employee")
 
 const CreateFilter = require("../scripts/createfilters")
 
@@ -20,13 +21,18 @@ class Service {
         try {
             const filter = CreateFilter(req.query)
             const divisionFilter = filter.name ? { name: filter.name } : null
-            const organizationFilter = filter.organization ? { name: filter.organization } : null
+            const organizationFilter = filter.organization ? { shortName: filter.organization } : null
             const items = await Model.findAndCountAll({ where: divisionFilter, include: [{ where: organizationFilter, model: OrganizationModel, attributes: ['id', 'name', 'shortName'] }], })
             res.json(items)
         }
         catch (err) {
             next(err)
         }
+    }
+
+    async getForPDF(req, res, next) {
+        const items = await Model.findAll({ include: [SubdivisionModel] })
+
     }
 
     async get(req, res, next) {

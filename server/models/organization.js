@@ -11,7 +11,7 @@ const Organization = db.define('organizations', {
         type: DataTypes.STRING(100),
     },
     name: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(255),
     },
     address: {
         type: DataTypes.STRING(100),
