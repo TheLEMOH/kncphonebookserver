@@ -1,5 +1,6 @@
 const { limit } = require("../config");
 const Organization = require("../models/organization");
+const Degree = require('../models/degree')
 const Model = require("../models/individual");
 
 const CreateFilter = require("../scripts/createfilters");
@@ -39,7 +40,7 @@ class Service {
     try {
       const items = await Model.findAll({
         order: ["name"],
-        include: [{ model: Organization }],
+        include: [{ model: Organization }, { model: Degree }],
       });
       res.json(items);
     } catch (err) {

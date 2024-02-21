@@ -1,7 +1,7 @@
 const { limit } = require("../config");
-const Degree = require("../models/degree");
 const Organization = require("../models/organization");
 const Division = require("../models/division");
+const Degree = require("../models/degree")
 const Subdivision = require("../models/subdivision");
 const Position = require("../models/Position");
 const Model = require("../models/employee");
@@ -61,9 +61,9 @@ class Service {
         include: [
           { where: organizationFilter, model: Organization },
           { where: subDivisionFilter, model: Subdivision },
-          { model: Degree },
           { where: divisionFilter, model: Division },
           { where: positionFilter, model: Position },
+          { model: Individual, include: [{ model: Degree }] }
         ],
       });
       res.json(items);
@@ -87,8 +87,6 @@ class Service {
 
       let order = byLevel === "true" ? [["levelSort", "DESC"]] : ["name"];
 
-      console.log(filter)
-
       const items = await Individual.findAndCountAll({
         order: ["name"],
         include: {
@@ -100,7 +98,6 @@ class Service {
           include: [
             { where: organizationFilter, model: Organization },
             { where: subDivisionFilter, model: Subdivision },
-            { model: Degree },
             { where: divisionFilter, model: Division },
             { where: positionFilter, model: Position },
           ],
@@ -121,7 +118,7 @@ class Service {
     try {
       const items = await Model.findAll({
         order: ["name"],
-        include: [{ model: Organization }, { model: Subdivision }, { model: Degree }, { model: Position }],
+        include: [{ model: Organization }, { model: Subdivision }, { model: Position }],
       });
       res.json(items);
     } catch (err) {

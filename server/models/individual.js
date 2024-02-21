@@ -2,6 +2,7 @@ const { DataTypes } = require("sequelize");
 const db = require("../../db");
 
 const OrganizationModel = require("./organization");
+const DegreeModel = require("./degree");
 
 const Individual = db.define(
   "individuals",
@@ -14,6 +15,14 @@ const Individual = db.define(
 
     name: {
       type: DataTypes.STRING(100),
+    },
+
+    degreeId: {
+      type: DataTypes.UUID,
+      references: {
+        model: DegreeModel,
+        key: "id",
+      },
     },
 
     organizationId: {
@@ -33,8 +42,9 @@ const Individual = db.define(
 
 
 Individual.belongsTo(OrganizationModel);
+Individual.belongsTo(DegreeModel);
+
 OrganizationModel.hasMany(Individual);
-
-
+DegreeModel.hasMany(Individual);
 
 module.exports = Individual;
