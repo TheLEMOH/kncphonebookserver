@@ -20,7 +20,7 @@ const Position = db.define(
     },
   },
   {
-    /*     schema: 'employees', */
+ /*    schema: 'employees', */
     sequelize: db,
     timestamps: false,
   }

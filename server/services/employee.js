@@ -3,7 +3,7 @@ const Organization = require("../models/organization");
 const Division = require("../models/division");
 const Degree = require("../models/degree")
 const Subdivision = require("../models/subdivision");
-const Position = require("../models/Position");
+const Position = require("../models/position");
 const Model = require("../models/employee");
 const Individual = require("../models/individual");
 

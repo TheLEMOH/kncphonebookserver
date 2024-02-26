@@ -19,7 +19,7 @@ const Degree = db.define('degrees', {
     },
 
 }, {
-    /* schema: 'employees', */
+    /*  schema: 'employees',  */
     sequelize: db,
     timestamps: false,
 })

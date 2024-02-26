@@ -20,7 +20,7 @@ const User = db.define('users', {
 
     },
 }, {
-  /*   schema: 'employees', */
+/*     schema: 'employees', */
     sequelize: db,
     timestamps: false,
     hooks: {

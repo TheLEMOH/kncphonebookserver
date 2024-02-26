@@ -37,7 +37,7 @@ const Subdivision = db.define('subdivisions', {
     }
 
 }, {
-    /*    schema: 'employees', */
+  /*   schema: 'employees', */
     sequelize: db,
     timestamps: false,
 })

@@ -80,16 +80,16 @@ const Employee = db.define(
       type: DataTypes.STRING,
     },
 
-    /*  the_geom: {
-       type: DataTypes.GEOMETRY("POINT"),
-     }, */
-
+   /*  the_geom: {
+      type: DataTypes.GEOMETRY("POINT"),
+    },
+ */
     levelSort: {
       type: DataTypes.INTEGER,
     },
   },
   {
-    /*     schema: 'employees', */
+/*     schema: 'employees', */
     sequelize: db,
     timestamps: false,
   }

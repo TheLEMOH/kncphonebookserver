@@ -18,9 +18,13 @@ class Service {
     try {
       const offset = Offset(req);
       const filter = CreateFilter(req.query);
+
       const items = await Model.findAndCountAll({ where: filter, order: ["name"], offset: offset, limit: limit });
       res.json(items);
     } catch (err) {
+
+      console.log(err)
+
       next(err);
     }
   }

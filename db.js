@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const db = new Sequelize('postgres://postgres:admin@localhost:5432/phonebook', { logging: false })
+const db = new Sequelize('postgres://postgres:admin@localhost/phonebook', { logging: false })
 
 try {
     db.authenticate();

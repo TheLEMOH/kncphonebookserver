@@ -22,7 +22,7 @@ const Organization = db.define('organizations', {
     }
 
 }, {
-    /*    schema: 'employees', */
+/*     schema: 'employees', */
     sequelize: db,
     timestamps: false,
 })

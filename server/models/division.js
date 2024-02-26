@@ -28,7 +28,7 @@ const Division = db.define('divisions', {
     }
 
 }, {
-    /*     schema: 'employees', */
+  /*   schema: 'employees', */
     sequelize: db,
     timestamps: false,
 })
