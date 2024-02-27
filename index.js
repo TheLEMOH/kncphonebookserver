@@ -36,7 +36,7 @@ db.sync({ alter: true });
 
 /* Ресурс */
 
-const staticFileMiddleware = express.static(path.join(__dirname + "/dist/"));
+const staticFileMiddleware = express.static(path.join(__dirname , "dist"));
 app.use(staticFileMiddleware);
 
 app.use(
