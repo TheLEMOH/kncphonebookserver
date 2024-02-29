@@ -1,11 +1,12 @@
 const { limit } = require("../config");
 const Organization = require("../models/organization");
 const Division = require("../models/division");
-const Degree = require("../models/degree")
+const Degree = require("../models/degree");
 const Subdivision = require("../models/subdivision");
 const Position = require("../models/position");
 const Model = require("../models/employee");
 const Individual = require("../models/individual");
+const Employment = require("../models/employment");
 
 const CreateFilter = require("../scripts/createfilters");
 const Offset = require("../scripts/offset");
@@ -47,6 +48,7 @@ class Service {
       const divisionFilter = filter.division ? { name: filter.division } : null;
       const subDivisionFilter = filter.subdivision ? { name: filter.subdivision } : null;
       const positionFilter = filter.position ? { name: filter.position } : null;
+      const employmentFilter = filter.employment ? { name: filter.employment } : null;
       const employeerFilter = Object.fromEntries(Object.entries(rawEmployeersFilter).filter(([_, v]) => v != null));
 
       const offset = Offset(req);
@@ -63,7 +65,8 @@ class Service {
           { where: subDivisionFilter, model: Subdivision },
           { where: divisionFilter, model: Division },
           { where: positionFilter, model: Position },
-          { model: Individual, include: [{ model: Degree }] }
+          { model: Individual, include: [{ model: Degree }] },
+          { where: employmentFilter, model: Employment },
         ],
       });
       res.json(items);

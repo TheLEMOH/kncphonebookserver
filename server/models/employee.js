@@ -6,6 +6,7 @@ const DivisionModel = require("./division");
 const SubdivisionModel = require("./subdivision");
 const PositionModel = require("./position");
 const IndividualModel = require("./individual");
+const EmploymentModel = require("./employment");
 
 const Employee = db.define(
   "employees",
@@ -80,7 +81,7 @@ const Employee = db.define(
       type: DataTypes.STRING,
     },
 
-   /*  the_geom: {
+    /*  the_geom: {
       type: DataTypes.GEOMETRY("POINT"),
     },
  */
@@ -89,7 +90,7 @@ const Employee = db.define(
     },
   },
   {
-/*     schema: 'employees', */
+    /*     schema: 'employees', */
     sequelize: db,
     timestamps: false,
   }
@@ -99,12 +100,14 @@ Employee.belongsTo(OrganizationModel);
 Employee.belongsTo(DivisionModel);
 Employee.belongsTo(SubdivisionModel);
 Employee.belongsTo(PositionModel);
-Employee.belongsTo(IndividualModel,);
+Employee.belongsTo(IndividualModel);
+Employee.belongsTo(EmploymentModel);
 
 OrganizationModel.hasMany(Employee);
 DivisionModel.hasMany(Employee);
 SubdivisionModel.hasMany(Employee);
 PositionModel.hasMany(Employee);
-IndividualModel.hasMany(Employee,);
+IndividualModel.hasMany(Employee);
+EmploymentModel.hasMany(Employee);
 
 module.exports = Employee;
