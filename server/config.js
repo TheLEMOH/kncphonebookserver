@@ -1,4 +1,4 @@
 module.exports = {
     secret: 'MALIMONOV',
-    limit: 20
+    limit: 25
 }

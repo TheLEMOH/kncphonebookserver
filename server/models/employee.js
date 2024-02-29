@@ -81,10 +81,10 @@ const Employee = db.define(
       type: DataTypes.STRING,
     },
 
-    /*  the_geom: {
+    the_geom: {
       type: DataTypes.GEOMETRY("POINT"),
     },
- */
+
     levelSort: {
       type: DataTypes.INTEGER,
     },
