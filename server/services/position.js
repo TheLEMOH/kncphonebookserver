@@ -22,8 +22,7 @@ class Service {
       const items = await Model.findAndCountAll({ where: filter, order: ["name"], offset: offset, limit: limit });
       res.json(items);
     } catch (err) {
-
-      console.log(err)
+      console.log(err);
 
       next(err);
     }
@@ -31,8 +30,7 @@ class Service {
 
   async get(req, res, next) {
     try {
-      const filter = CreateFilter(req.query);
-      const items = await Model.findAll({ where: filter, order: ["name"] });
+      const items = await Model.findAll({ order: ["name"] });
       res.json(items);
     } catch (err) {
       next(err);

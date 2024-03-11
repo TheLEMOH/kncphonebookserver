@@ -34,12 +34,11 @@ const Individual = db.define(
     },
   },
   {
-   /*  schema: 'employees', */
+ /*    schema: "employees", */
     sequelize: db,
     timestamps: false,
   }
 );
-
 
 Individual.belongsTo(OrganizationModel);
 Individual.belongsTo(DegreeModel);

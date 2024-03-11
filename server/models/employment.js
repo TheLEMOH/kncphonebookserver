@@ -27,7 +27,7 @@ const Employment = db.define(
     },
   },
   {
-    /*  schema: 'employees',  */
+  /*   schema: "employees", */
     sequelize: db,
     timestamps: false,
   }

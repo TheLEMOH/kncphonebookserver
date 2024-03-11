@@ -23,15 +23,37 @@ class Service {
 
   async createbulk(req, res, next) {
     try {
-      const { json, organizationId } = req.body;
+      const { json, organizationId, type } = req.body;
       const organization = await Organization.findOne({ where: { id: organizationId } });
 
-      json.forEach((j) => {
-        j.organizationId = organizationId;
-        j.address = organization.address;
-      });
+      if (type == "create") {
+        const forCreate = json.filter((item) => !item.id);
+        const forUpdate = json.filter((item) => item.id);
 
-      await Model.bulkCreate(json);
+        forCreate.forEach((item) => {
+          delete item.id;
+          item.organizationId = organizationId;
+          item.address = organization.address;
+        });
+
+        forUpdate.forEach((item) => {
+          Model.update(item, { where: { id: item.id } });
+        });
+
+        await Model.bulkCreate(forCreate);
+      }
+
+      if (type == "replace") {
+        await Model.destroy({ where: { organizationId } });
+
+        json.forEach((item) => {
+          delete item.id;
+          item.organizationId = organizationId;
+          item.address = organization.address;
+        });
+
+        await Model.bulkCreate(json);
+      }
 
       res.json(true);
     } catch (err) {
@@ -119,9 +141,10 @@ class Service {
 
   async get(req, res, next) {
     try {
+      const filter = CreateFilter(req.query);
       const items = await Model.findAll({
         order: ["name"],
-        include: [{ model: Organization }, { model: Subdivision }, { model: Position }],
+        include: [{ model: Organization, where: filter }, { model: Subdivision }, { model: Position }],
       });
       res.json(items);
     } catch (err) {
@@ -142,7 +165,6 @@ class Service {
   async getByIdSubdivision(req, res, next) {
     try {
       const id = req.params.id;
-
       const item = await Model.findAll({ where: { subdivisionId: id }, include: [{ model: Position }] });
 
       res.json(item);

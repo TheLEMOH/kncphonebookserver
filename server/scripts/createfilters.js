@@ -4,18 +4,16 @@ const CreateFilter = (query) => {
   const filter = {};
 
   for (let i in query) {
-    if (i != "page" && i != "level" && i != "byLevel" && i != "levelSort" && !i.includes("id")) filter[i] = { [Op.like]: `%${query[i]}%` };
+    if (i != "page" && i != "level" && i != "byLevel" && i != "levelSort" && !i.includes("id") && !i.includes("Id")) filter[i] = { [Op.like]: `%${query[i]}%` };
 
-    if (i.includes("id")) {
+    if (i.includes("id") || i.includes("Id")) {
       filter[i] = query[i];
     }
 
     if (i == "levelSort" && query[i]) {
-
       if (isNaN(query[i])) {
         filter[i] = null;
-      }
-      else {
+      } else {
         filter[i] = query[i];
       }
     }

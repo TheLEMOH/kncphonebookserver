@@ -87,10 +87,16 @@ const Employee = db.define(
 
     levelSort: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+
+    isFired: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {
-    /*     schema: 'employees', */
+    /*  schema: "employees", */
     sequelize: db,
     timestamps: false,
   }
